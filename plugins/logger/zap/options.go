@@ -1,14 +1,21 @@
 package zap
 
 import (
+	"github.com/bullteam/zeus-core/logger"
 	"go.uber.org/zap"
 	"go.uber.org/zap/zapcore"
-
-	"github.com/bullteam/zeus-core/logger"
+	"io"
 )
 
 type Options struct {
 	logger.Options
+	writeSyncer zapcore.WriteSyncer
+}
+
+type callerSkipKey struct{}
+
+func WithCallerSkip(i int) logger.Option {
+	return logger.SetOption(callerSkipKey{}, i)
 }
 
 type configKey struct{}
@@ -35,4 +42,16 @@ type optionsKey struct{}
 
 func WithOptions(opts ...zap.Option) logger.Option {
 	return logger.SetOption(optionsKey{}, opts)
+}
+
+type outwriter struct{}
+
+func WithOutput(i io.Writer) logger.Option {
+	return logger.SetOption(outwriter{}, i)
+}
+
+type singleOutput struct{}
+
+func WithSingleOutput(i bool) logger.Option {
+	return logger.SetOption(singleOutput{}, i)
 }

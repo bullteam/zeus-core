@@ -4,7 +4,6 @@ go 1.18
 
 require (
 	github.com/bsm/redislock v0.7.2
-	github.com/go-admin-team/go-admin-core v1.3.11
 	github.com/go-redis/redis/v7 v7.4.1
 	github.com/google/uuid v1.3.0
 	github.com/json-iterator/go v1.1.12
